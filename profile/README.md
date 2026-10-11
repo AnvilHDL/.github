@@ -15,6 +15,8 @@
   &nbsp; · &nbsp;
   <a href="https://dl.acm.org/doi/10.1145/3779212.3790125">Research paper</a>
   &nbsp; · &nbsp;
+  <a href="https://github.com/AnvilHDL/pact">Pact</a>
+  &nbsp; · &nbsp;
   <a href="https://anvilhdl.zulipchat.com/">Community</a>
 </p>
 
@@ -22,12 +24,15 @@
 
 **Anvil is a general-purpose hardware description language (HDL) that gives designers control over registers and clock-cycle latency.** Its type system ensures that values are used only while valid and that registers are not overwritten while still in use. This property is called **timing safety** and is enforced at compile time.
 
-Anvil designs compile to synthesizable SystemVerilog.
+**[Pact](https://github.com/AnvilHDL/pact) extends Anvil with session types for the communication between components.** Each component declares its protocol as an interface: which messages it sends and receives, in what order, and with what timing. The compiler checks that every process follows its protocol, and that the components wired together are compatible: they never deadlock, never wait for a message that cannot arrive, and keep making progress. This property is called **communication safety** and is also enforced at compile time.
+
+Anvil and Pact designs compile to synthesizable SystemVerilog.
 
 <table>
   <thead>
     <tr>
-      <th align="left">Type system</th>
+      <th align="left">Timing safety</th>
+      <th align="left">Communication safety</th>
       <th align="left">RTL expressiveness</th>
       <th align="left">Hardware efficiency</th>
     </tr>
@@ -35,8 +40,9 @@ Anvil designs compile to synthesizable SystemVerilog.
   <tbody>
     <tr>
       <td>Anvil's type system enforces <em>timing safety</em> <em>modularly</em>.</td>
+      <td>Pact's session types ensure that composed components never deadlock and keep making progress.</td>
       <td>Designers control registers and cycle-level latency.</td>
-      <td>Anvil designs add no clock-cycle latency and have minimal overhead in area, power, and frequency.</td>
+      <td>Anvil designs add no clock-cycle latency and have minimal overhead in area, power, and frequency. Pact designs also add no clock-cycle latency.</td>
     </tr>
   </tbody>
 </table>
@@ -52,8 +58,15 @@ Run a program in the [online playground](https://anvil.kisp-lab.org/), work thro
 - **[Documentation](https://github.com/AnvilHDL/anvil-docs)** — The source for the documentation site, tutorial, and language reference.
 - **[Evaluation experiments](https://github.com/AnvilHDL/AnvilHDL-Experiments)** — Evaluation designs, test harnesses, synthesis reports, and reproduction instructions.
 - **[RISCy experiment](https://github.com/AnvilHDL/anvil-RISCy-Experiment)** — A simple pipelined RISC-V processor written in Anvil.
+- **[Pact compiler](https://github.com/AnvilHDL/pact)** — Anvil extended with session types and compatibility checking.
+- **[Pact experiments](https://github.com/AnvilHDL/Pact-Experiments)** — Pact benchmarks, SystemVerilog references, and the scripts for the POPL 2027 evaluation.
+- **[Pact formalization](https://github.com/AnvilHDL/Pact-formalization)** — The Lean 4 mechanization of Pact's type system.
 
 ## Publications
+
+1. Aditya Ranjan Jha, Jason Zhijingcheng Yu, Umang Mathur, and Prateek Saxena. 2027. **[A Type System for Communication Safe Hardware Design](https://umangmathur.org/publications/2027-popl-jha-communication-safe-hardware/)**. *Proceedings of the ACM on Programming Languages* (POPL 2027). To appear.
+
+   [BibTeX](https://github.com/AnvilHDL/pact#citing) · [Artifact](https://doi.org/10.5281/zenodo.23301148)
 
 1. Jason Zhijingcheng Yu, Aditya Ranjan Jha, Umang Mathur, Trevor E. Carlson, and Prateek Saxena. 2026. **[Anvil: A General-Purpose Timing-Safe Hardware Description Language](https://dl.acm.org/doi/10.1145/3779212.3790125)**. In *Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems* (ASPLOS ’26). Association for Computing Machinery. DOI: [10.1145/3779212.3790125](https://doi.org/10.1145/3779212.3790125).
 
@@ -61,7 +74,7 @@ Run a program in the [online playground](https://anvil.kisp-lab.org/), work thro
 
 ## Join the discussion
 
-For discussions please join [AnvilHDL Zulip community](https://anvilhdl.zulipchat.com/). Report bugs or propose changes through the [compiler](https://github.com/AnvilHDL/anvil/issues), [language server](https://github.com/AnvilHDL/anvil-lsp/issues), or [documentation](https://github.com/AnvilHDL/anvil-docs/issues) issue trackers. Contributions are welcome.
+For discussions please join [AnvilHDL Zulip community](https://anvilhdl.zulipchat.com/). Report bugs or propose changes through the [compiler](https://github.com/AnvilHDL/anvil/issues), [Pact compiler](https://github.com/AnvilHDL/pact/issues), [language server](https://github.com/AnvilHDL/anvil-lsp/issues), or [documentation](https://github.com/AnvilHDL/anvil-docs/issues) issue trackers. Contributions are welcome.
 
 ## Collaboration
 
