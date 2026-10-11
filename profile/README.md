@@ -24,7 +24,9 @@
 
 **Anvil is a general-purpose hardware description language (HDL) that gives designers control over registers and clock-cycle latency.** Its type system ensures that values are used only while valid and that registers are not overwritten while still in use. This property is called **timing safety** and is enforced at compile time.
 
-**[Pact](https://github.com/AnvilHDL/pact) extends Anvil with session types for the communication between components.** Each component declares its protocol as an interface: which messages it sends and receives, in what order, and with what timing. The compiler checks that every process follows its protocol, and that the components wired together are compatible: they never deadlock, never wait for a message that cannot arrive, and keep making progress. This property is called **communication safety** and is also enforced at compile time.
+**[Pact](https://github.com/AnvilHDL/pact) extends Anvil with session types for communication between components.** Each component declares an interface whose type describes its communication behaviour, control flow, and timing. The compiler checks that every process conforms to its declared type and that the types of processes composed together are compatible. Compatible processes exchange messages synchronously without deadlocking. This property is called **communication safety** and is enforced at compile time.
+
+Pact can also check compatibility in an **open setting**, where some components are not yet available. This allows designers to build large systems incrementally.
 
 Anvil and Pact designs compile to synthesizable SystemVerilog.
 
